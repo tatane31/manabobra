@@ -94,31 +94,11 @@ void hbridge(int Sleep) {
     digitalWrite(MAGMIN_PIN, LOW);
     digitalWrite(MAGPLUS_PIN, HIGH);
   }
-//  bitWrite(PORTB, 1, 1);
-//  bitWrite(PORTB, 2 ,0);
   if ((BridgeTime - previousBridgeTime >= (Sleep/2)) && (BridgeTime - previousBridgeTime <= (Sleep))) {
     digitalWrite(MAGPLUS_PIN, LOW);
     digitalWrite(MAGMIN_PIN, HIGH);
   }
   previousBridgeTime = BridgeTime;
-//  bitWrite(PORTB, 1, 0);
-//  bitWrite(PORTB, 2, 1);
-//  delay(Sleep/2);
-}
-
-void hUp() {
-  digitalWrite(MAGMIN_PIN, LOW);
-  digitalWrite(MAGPLUS_PIN, HIGH);
-// Arduino Nano specific opts
-//  bitWrite(PORTB, 1, 1);
-//  bitWrite(PORTB, 2 ,0);
-}
-
-void hDn() {
-  digitalWrite(MAGPLUS_PIN, LOW);
-  digitalWrite(MAGMIN_PIN, HIGH);
-//  bitWrite(PORTB, 1, 0);
-//  bitWrite(PORTB, 2, 1);
 }
 
 void hOff() {
@@ -269,7 +249,6 @@ void loop() {
           else {
             Sleep = SetupWidth;
           }
-//          BridgeTime = millis();
           if (micros() - previousBridgeTime < (Sleep/2)) {
             digitalWrite(MAGMIN_PIN, LOW);
             digitalWrite(MAGPLUS_PIN, HIGH);
