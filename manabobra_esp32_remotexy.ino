@@ -104,8 +104,6 @@ void hbridge(int Sleep) {
 void hOff() {
   digitalWrite(MAGPLUS_PIN, LOW);
   digitalWrite(MAGMIN_PIN, LOW);
-//  bitWrite(PORTB, 1, 0);
-//  bitWrite(PORTB, 2, 0);
 }
 
 void setup() {
@@ -114,7 +112,6 @@ void setup() {
   pinMode(MAGMIN_PIN, OUTPUT);
   pinMode(ELECTROMAGNET_PIN, OUTPUT);
   pinMode(REED_SENSOR_PIN, INPUT_PULLUP);
-//  pinMode(REED_SENSOR_PIN, INPUT);
   pinMode(SETUP_PIN, INPUT_PULLUP);
   pinMode(REDLED_LOWPRESSCOUNT_PIN, OUTPUT);
   LastButtonState = digitalRead(REED_SENSOR_PIN);
@@ -253,7 +250,11 @@ void loop() {
             digitalWrite(MAGMIN_PIN, LOW);
             digitalWrite(MAGPLUS_PIN, HIGH);
           }
-          if ((micros() - previousBridgeTime >= (Sleep/2)) && (micros() - previousBridgeTime <= (Sleep))) {
+	  if ((micros() - previousBridgeTime == (Sleep/2)) {
+	    digitalWrite(MAGPLUS_PIN, LOW);
+	    digitalWrite(MAGMIN_PIN, LOW);
+	  }
+          if ((micros() - previousBridgeTime > (Sleep/2)) && (micros() - previousBridgeTime <= (Sleep))) {
             digitalWrite(MAGPLUS_PIN, LOW);
             digitalWrite(MAGMIN_PIN, HIGH);
           }
